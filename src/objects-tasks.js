@@ -18,7 +18,8 @@
  *    shallowCopy({}) => {}
  */
 function shallowCopy(obj) {
-  return { ...obj };
+  const shallowObject = {};
+  return Object.assign(shallowObject, obj);
 }
 
 /**
@@ -34,11 +35,11 @@ function shallowCopy(obj) {
  */
 function mergeObjects(objects) {
   return objects.reduce((acc, curr) => {
-    Object.keys(curr).forEach((key) => {
+    Object.entries(curr).forEach(([key, value]) => {
       if (acc[key]) {
-        acc[key] += curr[key];
+        acc[key] += value;
       } else {
-        acc[key] = curr[key];
+        acc[key] = value;
       }
     });
     return acc;
@@ -104,7 +105,7 @@ function compareObjects(obj1, obj2) {
  *    isEmptyObject({a: 1}) => false
  */
 function isEmptyObject(obj) {
-  return Object.getOwnPropertyNames(obj).length === 0;
+  return Object.keys(obj).length === 0;
 }
 
 /**
