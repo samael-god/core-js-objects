@@ -147,9 +147,9 @@ function makeWord(lettersObject) {
       .sort((a, b) => b - a)
       .slice(0, 1) + 1;
   const array = Array(length);
-  Object.entries(lettersObject).forEach((entry) => {
-    entry[1].forEach((position) => {
-      array[position] = entry[0];
+  Object.entries(lettersObject).forEach(([key, val]) => {
+    val.forEach((position) => {
+      array[position] = key;
     });
   });
   return array.join('');
@@ -232,10 +232,8 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-  // const obj = JSON.parse(json);
-  // console.log(obj, proto);
-  // Object.assign(obj, ...proto);
-  // return obj;
+  const obj = JSON.parse(json);
+  return Object.setPrototypeOf(obj, proto);
 }
 
 /**
